@@ -36,9 +36,7 @@ attr_reader :grid
     
        def print_cheat_grid
         @grid.each do |sub|
-            sub.each do |card|
-               print "| #{card.value} |"
-            end
+            sub.each { |card| print "| #{card.value} |" }
             print "\n"
             print"----" * @length
             print "\n"
@@ -47,9 +45,7 @@ attr_reader :grid
 
        def print_hidden_grid
         @grid.each do |sub|
-            sub.each do |card|
-               print "#{card.displayed} "
-            end
+            sub.each { |card|   print "#{card.displayed} " }
             print "\n"
             print"----" * @length
             print "\n"
@@ -57,9 +53,15 @@ attr_reader :grid
        end
 
        def won?
-        @grid.all? do |sub|
-            sub.all? { |card| card.visible == true }
+            @grid.all? do |sub|
+                sub.all? { |card| card.visible == true }
             end
+       end
+       
+       def [](index)
+        row = index[0]
+        col = index[-1]
+        @grid[row][col]
        end
 
        def print_current_board
@@ -78,7 +80,6 @@ attr_reader :grid
     end
 
     def reveal(index)
-
         row = index[0]
         col = index[-1]
         
@@ -88,22 +89,9 @@ attr_reader :grid
     end
 
     def match?(pos1,pos2)
-        row1 = pos1[0]
-        col1 = pos1[-1]
-        row2 = pos2[0]
-        col2 = pos2[-1]
-        return true if @grid[row1][col1].value == @grid[row2][col2].value
+        return true if self[pos1].value == self[pos2].value
         false
     end
     
 end
 
-# b = Board.new(4)
-# b.populate
-# b.print_current_board
-# b.reveal([1, 2])
-# b.print_current_board
-
-# c = Board.new(4)
-# b.populate
-# b.cheat_grid

@@ -1,19 +1,19 @@
 class Card
-    attr_reader :value , :displayed, :visible
+    attr_reader :value , :displayed
+    attr_accessor :visible
 
     def initialize(value)
         @value = value
-        @dispalyed = ""
+        @displayed = " "
         @visible = false
     end
 
     def show
-        @displayed = @value
-        @visible = true
+        self.visible = true
     end
 
     def hide
-        @dispalyed  = ""
-        @visible = false
+        self.visible = false
     end
+    
 end
